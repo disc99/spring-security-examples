@@ -1,0 +1,3 @@
+rootProject.name = 'spring-security-examples'
+include 'spring-mvc'
+include 'helloworld'

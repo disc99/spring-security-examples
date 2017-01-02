@@ -1,0 +1,57 @@
+ext {
+    jdk = 1.8
+    encoding = 'UTF-8'
+    lombok = '1.16.12'
+}
+
+buildscript {
+    ext {
+        springBootVersion = '1.4.3.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+}
+
+subprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    group 'io.disc99'
+    version '0.0.1-SNAPSHOT'
+    compileJava {
+        sourceCompatibility = rootProject.jdk
+        targetCompatibility = rootProject.jdk
+        options.encoding = rootProject.encoding
+    }
+    dependencies {
+        testCompile 'junit:junit:4.11'
+    }
+}
+
+project(':helloworld') {
+    apply plugin: 'org.springframework.boot'
+    dependencies {
+        compile "org.springframework.boot:spring-boot-starter-web",
+                "org.springframework.boot:spring-boot-starter-thymeleaf",
+                "org.springframework.boot:spring-boot-starter-security"
+
+    }
+}
+
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.2.1'
+    distributionUrl = 'http://services.gradle.org/distributions/gradle-3.2.1-all.zip'
+}
