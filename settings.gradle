@@ -1,3 +1,4 @@
 rootProject.name = 'spring-security-examples'
-include 'spring-mvc'
 include 'helloworld'
+include 'helloworld-jdbc'
+include 'helloworld-details-service'

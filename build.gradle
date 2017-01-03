@@ -35,6 +35,8 @@ subprojects {
         options.encoding = rootProject.encoding
     }
     dependencies {
+        runtime('org.springframework.boot:spring-boot-devtools')
+
         testCompile 'junit:junit:4.11'
     }
 }
@@ -44,8 +46,34 @@ project(':helloworld') {
     dependencies {
         compile "org.springframework.boot:spring-boot-starter-web",
                 "org.springframework.boot:spring-boot-starter-thymeleaf",
+                "org.thymeleaf.extras:thymeleaf-extras-springsecurity4",
                 "org.springframework.boot:spring-boot-starter-security"
 
+    }
+}
+
+project(':helloworld-jdbc') {
+    apply plugin: 'org.springframework.boot'
+    dependencies {
+        compile "org.springframework.boot:spring-boot-starter-web",
+                "org.springframework.boot:spring-boot-starter-thymeleaf",
+                "org.thymeleaf.extras:thymeleaf-extras-springsecurity4",
+                "org.springframework.boot:spring-boot-starter-security",
+                'org.springframework.boot:spring-boot-starter-jdbc'
+
+        runtime 'com.h2database:h2'
+    }
+}
+
+project(':helloworld-details-service') {
+    apply plugin: 'org.springframework.boot'
+    dependencies {
+        compile "org.springframework.boot:spring-boot-starter-web",
+                "org.springframework.boot:spring-boot-starter-thymeleaf",
+                "org.thymeleaf.extras:thymeleaf-extras-springsecurity4",
+                "org.springframework.boot:spring-boot-starter-security"
+
+        runtime 'com.h2database:h2'
     }
 }
 
