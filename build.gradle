@@ -35,8 +35,6 @@ subprojects {
         options.encoding = rootProject.encoding
     }
     dependencies {
-        runtime('org.springframework.boot:spring-boot-devtools')
-
         testCompile 'junit:junit:4.11'
     }
 }
@@ -48,6 +46,8 @@ project(':helloworld') {
                 "org.springframework.boot:spring-boot-starter-thymeleaf",
                 "org.thymeleaf.extras:thymeleaf-extras-springsecurity4",
                 "org.springframework.boot:spring-boot-starter-security"
+
+        runtime('org.springframework.boot:spring-boot-devtools')
 
     }
 }
@@ -62,6 +62,8 @@ project(':helloworld-jdbc') {
                 'org.springframework.boot:spring-boot-starter-jdbc'
 
         runtime 'com.h2database:h2'
+        runtime('org.springframework.boot:spring-boot-devtools')
+
     }
 }
 
@@ -74,19 +76,20 @@ project(':helloworld-details-service') {
                 "org.springframework.boot:spring-boot-starter-security"
 
         runtime 'com.h2database:h2'
+        runtime('org.springframework.boot:spring-boot-devtools')
     }
 }
 
-project(':helloworld-oauth-auth-server') {
+project(':helloworld-sso-auth') {
     apply plugin: 'org.springframework.boot'
     dependencies {
         compile "org.springframework.boot:spring-boot-starter-web",
                 "org.springframework.boot:spring-boot-starter-thymeleaf",
-//                "org.thymeleaf.extras:thymeleaf-extras-springsecurity4",
-//                "org.springframework.boot:spring-boot-starter-security",
+                "org.springframework.boot:spring-boot-starter-security",
+                "com.fasterxml.jackson.datatype:jackson-datatype-jsr310",
                 'org.springframework.cloud:spring-cloud-starter-oauth2'
 
-        runtime 'com.h2database:h2'
+        runtime('org.springframework.boot:spring-boot-devtools')
     }
     dependencyManagement {
         imports {
@@ -95,16 +98,16 @@ project(':helloworld-oauth-auth-server') {
     }
 }
 
-project(':helloworld-oauth-resource-server') {
+project(':helloworld-sso-resource') {
     apply plugin: 'org.springframework.boot'
     dependencies {
         compile "org.springframework.boot:spring-boot-starter-web",
                 "org.springframework.boot:spring-boot-starter-thymeleaf",
-//                "org.thymeleaf.extras:thymeleaf-extras-springsecurity4",
-//                "org.springframework.boot:spring-boot-starter-security",
+                "org.springframework.boot:spring-boot-starter-security",
+                "com.fasterxml.jackson.datatype:jackson-datatype-jsr310",
                 'org.springframework.cloud:spring-cloud-starter-oauth2'
 
-        runtime 'com.h2database:h2'
+        runtime('org.springframework.boot:spring-boot-devtools')
     }
     dependencyManagement {
         imports {
@@ -113,6 +116,23 @@ project(':helloworld-oauth-resource-server') {
     }
 }
 
+project(':helloworld-sso-ui') {
+    apply plugin: 'org.springframework.boot'
+    dependencies {
+        compile "org.springframework.boot:spring-boot-starter-web",
+                "org.springframework.boot:spring-boot-starter-thymeleaf",
+                "org.springframework.boot:spring-boot-starter-security",
+                "com.fasterxml.jackson.datatype:jackson-datatype-jsr310",
+                'org.springframework.cloud:spring-cloud-starter-oauth2'
+
+        runtime('org.springframework.boot:spring-boot-devtools')
+    }
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.SR3"
+        }
+    }
+}
 
 task wrapper(type: Wrapper) {
     gradleVersion = '3.2.1'
