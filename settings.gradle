@@ -2,6 +2,13 @@ rootProject.name = 'spring-security-examples'
 include 'helloworld'
 include 'helloworld-jdbc'
 include 'helloworld-details-service'
+
+// sso example
 include 'helloworld-sso-auth'
 include 'helloworld-sso-resource'
 include 'helloworld-sso-ui'
+
+// sso example with jwt
+include 'helloworld-sso-jwt-auth'
+include 'helloworld-sso-jwt-resource'
+include 'helloworld-sso-jwt-ui'
